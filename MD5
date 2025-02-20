@@ -1,0 +1,11 @@
+315d664dbab55dd18684516d30490b0d *DESCRIPTION
+aaa9b1bf9063e8a5302acdbe09b154d7 *NAMESPACE
+85c244a01578b2ae605c7c95dcd8bf8b *R/SIOPutils.R
+2817fc28d16704d93ab9822b665c4b30 *R/orcamentoBR.R
+cda5ceeb41217e4b468808961b2cb4b1 *R/quaisDimensoes.R
+0b138bd77694feccb3b6f315c3bc3dda *inst/certs/fullchainsiop.pem
+019555100408c3ef26c9189630e80c11 *man/despesaDetalhada.Rd
+f43bd8989e913780a9b30c747cb1e095 *man/detailedExpenditure.Rd
+baf51709370904a96620b345509d625b *man/dimensoes.Rd
+3e7d98f599e6d6318bf80b56886d795b *man/quaisMembros.Rd
+95dcb7172282ebedf34f648adbc09f83 *man/whichMembers.Rd
