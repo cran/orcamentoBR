@@ -155,4 +155,6 @@ orçamento brasileiro, não deixe de consultar o \href{https://www1.siop.planeja
 \examples{
 \dontrun{despesaDetalhada(2020, UO = "73901", valorPLOA = FALSE, detalheMaximo = TRUE)}
 
+\dontrun{despesaDetalhada(exercicio = 2023, ResultadoPrimario = "6")}
+
 }

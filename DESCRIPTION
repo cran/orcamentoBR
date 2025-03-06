@@ -1,10 +1,10 @@
 Package: orcamentoBR
 Type: Package
 Title: Download Official Data on Brazil's Federal Budget
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: c(
     person(
-      given = "Daniel G.", family = "Reiss"
+      given = "Daniel Gersten", family = "Reiss"
       , email="daniel.reiss@planejamento.gov.br"
       , role = c("aut", "cre"), comment=c(ORCID = "0000-0003-1634-760X"))
       , person(
@@ -26,13 +26,14 @@ Encoding: UTF-8
 Imports: httr, jsonlite
 RoxygenNote: 7.3.2
 NeedsCompilation: no
-Packaged: 2025-02-18 20:46:04 UTC; daniel.reiss
-Author: Daniel G. Reiss [aut, cre] (<https://orcid.org/0000-0003-1634-760X>),
+Packaged: 2025-03-05 19:07:05 UTC; daniel.reiss
+Author: Daniel Gersten Reiss [aut, cre]
+    (<https://orcid.org/0000-0003-1634-760X>),
   Bernardo Borba de Andrade [ctb]
     (<https://orcid.org/0000-0003-4688-9733>),
   Gustavo José de Guimarães e Souza [ctb]
     (<https://orcid.org/0000-0002-0718-2295>),
   Ministério do Planejamento e Orçamento [cph, fnd]
-Maintainer: Daniel G. Reiss <daniel.reiss@planejamento.gov.br>
+Maintainer: Daniel Gersten Reiss <daniel.reiss@planejamento.gov.br>
 Repository: CRAN
-Date/Publication: 2025-02-20 17:30:02 UTC
+Date/Publication: 2025-03-06 00:00:06 UTC

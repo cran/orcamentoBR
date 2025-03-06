@@ -28,6 +28,6 @@ The dataframe contains the members in a dimension. Both code and description are
 This function calls [quaisMembros].
 }
 \examples{
-whichMembers(2023, dimensao = "Funcao")
+\dontrun{whichMembers(2023, dimensao = "Funcao")}
 
 }

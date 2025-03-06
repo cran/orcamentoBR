@@ -16,7 +16,7 @@
 #' @returns The dataframe contains the members in a dimension. Both code and description are provided.
 #'
 #' @examples
-#' quaisMembros(2023, dimensao = "Funcao")
+#' \dontrun{quaisMembros(2023, dimensao = "Funcao")}
 #'
 quaisMembros <- function(exercicio = .last_year()
                            , dimensao
@@ -60,7 +60,7 @@ quaisMembros <- function(exercicio = .last_year()
 #' @export
 #'
 #' @examples
-#' whichMembers(2023, dimensao = "Funcao")
+#' \dontrun{whichMembers(2023, dimensao = "Funcao")}
 #'
 whichMembers <- function(exercicio = .last_year(), dimensao
                          , ignoreSecureCertificate = FALSE) {

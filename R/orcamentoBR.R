@@ -106,6 +106,8 @@
 #' @examples
 #' \dontrun{despesaDetalhada(2020, UO = "73901", valorPLOA = FALSE, detalheMaximo = TRUE)}
 #'
+#' \dontrun{despesaDetalhada(exercicio = 2023, ResultadoPrimario = "6")}
+#'
 despesaDetalhada <-
   function(
     exercicio = .last_year()
@@ -158,10 +160,10 @@ despesaDetalhada <-
 
     if (grepl("^20\\d{2}$", exercicio)) {
       exercicio <- as.numeric(exercicio)
-      if (exercicio < 2003 | exercicio > as.numeric(format(Sys.Date(), "%Y"))-1)
-        stop("Erro: exercicio deve ser um n\u00FAmero entre 2003 e o ano anterior!")
+      if (exercicio < 2000 | exercicio > as.numeric(format(Sys.Date(), "%Y")))
+        stop("Erro: exercicio deve ser um n\u00FAmero entre 2000 e o ano atual!")
     }
-    else stop("Erro: exercicio deve ser um n\u00FAmero! E um n\u00FAmero entre 2003 e o ano anterior!")
+    else stop("Erro: exercicio deve ser um n\u00FAmero! E um n\u00FAmero entre 2000 e o ano atual!")
 
 
     query <- .constroiSIOPqueryDetalheAnual(

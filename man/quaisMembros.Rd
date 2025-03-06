@@ -28,6 +28,6 @@ The dataframe contains the members in a dimension. Both code and description are
 This function lists all members in a Brazilian Federal Budget dimension for a given year.
 }
 \examples{
-quaisMembros(2023, dimensao = "Funcao")
+\dontrun{quaisMembros(2023, dimensao = "Funcao")}
 
 }
