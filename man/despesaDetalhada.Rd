@@ -30,7 +30,9 @@ despesaDetalhada(
   valorPago = TRUE,
   incluiDescricoes = TRUE,
   detalheMaximo = FALSE,
-  ignoreSecureCertificate = FALSE
+  ignoreSecureCertificate = FALSE,
+  timeout = 0,
+  print_url = FALSE
 )
 }
 \arguments{
@@ -125,7 +127,7 @@ das dimensões serão retornados. O valor padrão é \code{TRUE}.)}
 dataframe will be disaggregated across all available dimensions, overriding
 any dimension choices made by other parameters. If the parameter is set to
 \code{FALSE}, only the selected dimensions will be returned. The default value is \code{FALSE}.
-(Se o parâmetro estiver definido como TRUE, o dataframe retornado será
+(Se o parâmetro estiver definido como \code{TRUE}, o dataframe retornado será
 desagregado em todas as dimensões disponíveis, substituindo qualquer escolha
 de dimensão feita por outros parâmetros. Se o parâmetro estiver definido como
 \code{FALSE}, apenas as dimensões selecionadas serão retornadas. O valor padrão é
@@ -135,6 +137,14 @@ de dimensão feita por outros parâmetros. Se o parâmetro estiver definido como
 the download of SIOP data will proceed while ignoring the secure certificate.
 (Se o parâmetro estiver definido como \code{TRUE}, o download dos dados
 do SIOP será realizado ignorando o certificado seguro.)}
+
+\item{timeout}{An Integer. Milliseconds to server timeout. Values less than 1000 are
+ignored by SIOP server. (Milisegundos até o timeout do servidor. Valores
+menores que 1000 são ignorados pelo servidor.)}
+
+\item{print_url}{A Boolean. If the parameter is set to \code{TRUE}, the function
+prints the constructed url before reaching the SIOP endpooint. (Se o parâmetro estiver
+definido como \code{TRUE}, a função exibe a url utilizanda antes de acessar o endpoint.)}
 }
 \value{
 The dataframe contains the expenditure figures. The columns are based

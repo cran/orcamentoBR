@@ -13,7 +13,7 @@
     , CategoriaEconomica, GND, ModalidadeAplicacao, ElementoDespesa
     , Fonte, IdUso, ResultadoPrimario
     , valorPLOA, valorLOA, valorLOAmaisCredito, valorEmpenhado, valorLiquidado
-    , valorPago, incluiDescricoes, detalheMaximo) {
+    , valorPago, incluiDescricoes, detalheMaximo, print_url, timeout) {
 
   # Funcao auxiliar para adicionar trechos de codigo
   escreve_descritores <-
@@ -293,7 +293,7 @@
       , "?i loa:", .dimensoes[which(.dimensoes$param == dimensao),]$var," ?dimensao . "
       , "?dimensao loa:codigo ?cod . "
       , "?dimensao rdfs:label ?desc . } } GROUP BY ?cod ?desc ORDER BY ?cod"
-      )
+    )
 
   return(query)
 }
@@ -307,7 +307,7 @@
 #' @returns A string. The URL.
 #'
 #' @noRd
-.formaURLSIOP <- function(query) {
+.formaURLSIOP <- function(query, timeout) {
   query <- gsub("\n", " ", query) # Remove newline characters
   query <- gsub("\\s+", " ", query)
   query <- utils::URLencode(query, TRUE, TRUE)
@@ -317,7 +317,9 @@
       , query
       , "&format=application%2Fsparql-results%2B"
       ,"json"
-      , "&timeout=0&debug=on")
+      , "&timeout="
+      , timeout
+      , "&debug=on")
   return(url)
 }
 
@@ -343,17 +345,26 @@
 
   } else { #ignoreSecureCertificate
     response <- tryCatch( {
-        httr::set_config(httr::config(ssl_verifypeer = FALSE))
-        httr::GET(url_completo)
-        }, error = function(e) {
-          stop("Error acessing the endpoint.\nErro de acesso ao endpoint.")
-        }
-     )
+      httr::set_config(httr::config(ssl_verifypeer = FALSE))
+      httr::GET(url_completo)
+    }, error = function(e) {
+      stop("Error acessing the endpoint.\nErro de acesso ao endpoint.")
+    }
+    )
   }
 
-  if (response$status_code != 200)
+  if (response$status_code != 200) {
+    tryCatch( {
+      conteudo_erro <- strsplit(rawToChar(response$content), "\n")[[1]][1]
+    }
+    , error = function(e) {
+      conteudo_erro <- rawToChar(response$content)
+    }
+    )
+
     stop(paste("Error in downloading from endpoint. Error code:"
-               , response$status_code))
+               , response$status_code, "\n", conteudo_erro ))
+  }
 
   text.content <- httr::content(response, "text", encoding = "UTF-8")
   text.content <- gsub("^\\s*\\n*\\s*\\{", "{", text.content)
@@ -410,7 +421,7 @@
                 "temSubfuncao", "temPrograma", "temAcao", "temPlanoOrcamentario", "temSubtitulo",
                 "temCategoriaEconomica", "temGND", "temModalidadeAplicacao", "temElementoDespesa",
                 "temFonteRecursos", "temIdentificadorUso", "temResultadoPrimario")
-      )
+    )
 
   return(dimensoes)
 }

@@ -1,11 +1,11 @@
-56cc8702287db3cdbfa66ceb34df706a *DESCRIPTION
+d26d30a3ad562d45d0cbdeeb8efa16b4 *DESCRIPTION
 aaa9b1bf9063e8a5302acdbe09b154d7 *NAMESPACE
-85c244a01578b2ae605c7c95dcd8bf8b *R/SIOPutils.R
-3abb213d79dffbbc266cf2fa183f5829 *R/orcamentoBR.R
+6c4740afaae87d355cf1e46a6b4132b7 *R/SIOPutils.R
+e40c79cb24fd83c9f94416cc3d54396d *R/orcamentoBR.R
 0b23bfc9978cde380a7b61e1bb7d424b *R/quaisDimensoes.R
 0b138bd77694feccb3b6f315c3bc3dda *inst/certs/fullchainsiop.pem
-4149120b17b9ecde18e6f9bdfe5df41f *man/despesaDetalhada.Rd
-f43bd8989e913780a9b30c747cb1e095 *man/detailedExpenditure.Rd
+8dc6e056138bb842c4bfbb635f4feceb *man/despesaDetalhada.Rd
+b4f1ec147e4cc2946cc24935c7d79e43 *man/detailedExpenditure.Rd
 baf51709370904a96620b345509d625b *man/dimensoes.Rd
 70030a62e2c6f86fdf0c9899d7444b4b *man/quaisMembros.Rd
 c754013e9b9aff11b904f3d3c6f1289a *man/whichMembers.Rd

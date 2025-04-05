@@ -85,7 +85,7 @@
 #'  dataframe will be disaggregated across all available dimensions, overriding
 #'  any dimension choices made by other parameters. If the parameter is set to
 #'  \code{FALSE}, only the selected dimensions will be returned. The default value is \code{FALSE}.
-#'  (Se o parâmetro estiver definido como TRUE, o dataframe retornado será
+#'  (Se o parâmetro estiver definido como \code{TRUE}, o dataframe retornado será
 #'  desagregado em todas as dimensões disponíveis, substituindo qualquer escolha
 #'  de dimensão feita por outros parâmetros. Se o parâmetro estiver definido como
 #'  \code{FALSE}, apenas as dimensões selecionadas serão retornadas. O valor padrão é
@@ -95,6 +95,12 @@
 #'   the download of SIOP data will proceed while ignoring the secure certificate.
 #'   (Se o parâmetro estiver definido como \code{TRUE}, o download dos dados
 #'   do SIOP será realizado ignorando o certificado seguro.)
+#' @param timeout An Integer. Milliseconds to server timeout. Values less than 1000 are
+#'  ignored by SIOP server. (Milisegundos até o timeout do servidor. Valores
+#'  menores que 1000 são ignorados pelo servidor.)
+#' @param print_url A Boolean. If the parameter is set to \code{TRUE}, the function
+#'  prints the constructed url before reaching the SIOP endpooint. (Se o parâmetro estiver
+#'  definido como \code{TRUE}, a função exibe a url utilizanda antes de acessar o endpoint.)
 #'
 #' @returns The dataframe contains the expenditure figures. The columns are based
 #'  on the choices made in the parameters.
@@ -144,7 +150,10 @@ despesaDetalhada <-
 
     , detalheMaximo = FALSE
 
-    , ignoreSecureCertificate = FALSE) {
+    , ignoreSecureCertificate = FALSE
+    , timeout = 0
+    , print_url = FALSE
+  ) {
 
     # Captura os argumentos passados na chamada da funcao
     args <- as.list(match.call()[-1])
@@ -178,9 +187,15 @@ despesaDetalhada <-
       , valorEmpenhado = valorEmpenhado, valorLiquidado = valorLiquidado
       , valorPago = valorPago
       , incluiDescricoes = incluiDescricoes
-      , detalheMaximo = detalheMaximo)
+      , detalheMaximo = detalheMaximo
+      , timeout = timeout
+      , print_url = print_url
+    )
 
-    xurl <- .formaURLSIOP(query)
+    if (!is.integer(timeout)) timeout <- 0
+    xurl <- .formaURLSIOP(query, timeout)
+
+    if (print_url) cat(xurl, "\n")
 
     x <- .downloadSIOP(xurl, ignoreSecureCertificate)
 
@@ -188,18 +203,12 @@ despesaDetalhada <-
 
 
     # Transforma valores em numeric
-    if(!is.null(x$ploa))
-      x$ploa <- as.numeric(x$ploa)
-    if(!is.null(x$loa ))
-      x$loa <- as.numeric(x$loa)
-    if(!is.null(x$loa_mais_credito))
-      x$loa_mais_credito <- as.numeric(x$loa_mais_credito)
-    if(!is.null(x$empenhado))
-      x$empenhado <- as.numeric(x$empenhado)
-    if(!is.null(x$liquidado))
-      x$liquidado <- as.numeric(x$liquidado)
-    if(!is.null(x$pago))
-      x$pago <- as.numeric(x$pago)
+    if(!is.null(x$ploa))      x$ploa      <- as.numeric(x$ploa)
+    if(!is.null(x$loa ))      x$loa       <- as.numeric(x$loa)
+    if(!is.null(x$loa_mais_credito))  x$loa_mais_credito <- as.numeric(x$loa_mais_credito)
+    if(!is.null(x$empenhado)) x$empenhado <- as.numeric(x$empenhado)
+    if(!is.null(x$liquidado)) x$liquidado <- as.numeric(x$liquidado)
+    if(!is.null(x$pago))      x$pago      <- as.numeric(x$pago)
 
 
     # Renomear as colunas
@@ -225,7 +234,7 @@ despesaDetalhada <-
 #' Download expenditure data from the Brazilian federal budget.
 #'
 #' @description
-#' This function calls [despesaDetalhada].
+#' This function calls \code{\link[=despesaDetalhada]{despesaDetalhada()}}.
 #'
 #' @inheritParams despesaDetalhada
 #'
@@ -239,7 +248,8 @@ detailedExpenditure <- function(
     , CategoriaEconomica, GND, ModalidadeAplicacao, ElementoDespesa
     , Fonte, IdUso, ResultadoPrimario
     , valorPLOA, valorLOA, valorLOAmaisCredito, valorEmpenhado, valorLiquidado
-    , valorPago, incluiDescricoes, detalheMaximo, ignoreSecureCertificate) {
+    , valorPago, incluiDescricoes, detalheMaximo, ignoreSecureCertificate
+    , timeout, print_url) {
   return(despesaDetalhada(
     exercicio = exercicio, Esfera = Esfera, Orgao = Orgao, UO = UO
     , Funcao = Funcao, Subfuncao = Subfuncao, Programa = Programa
@@ -248,5 +258,7 @@ detailedExpenditure <- function(
     , ModalidadeAplicacao = ModalidadeAplicacao, IdUso = IdUso
     , ResultadoPrimario = ResultadoPrimario, ElementoDespesa = ElementoDespesa
     , incluiDescricoes = incluiDescricoes
-    , ignoreSecureCertificate = ignoreSecureCertificate))
+    , ignoreSecureCertificate = ignoreSecureCertificate
+    , timeout = timeout, print_url = print_url
+  ))
 }
